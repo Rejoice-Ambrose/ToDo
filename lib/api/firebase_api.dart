@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,11 +15,17 @@ class FirebaseApi{
 
     return docTodo.id;
   }
-  static Stream<List<Todo>> readTodos()=> FirebaseFirestore.instance
-      .collection("todo")
+  // static Stream<List<Todo>> readTodos()=> FirebaseFirestore.instance
+  //     .collection("todo")
+  //     .orderBy(TodoField.createdTime, descending: true)
+  //     .snapshots()
+  //     .transform(Utils.transformer(Todo.fromJson))
+  //     .map<String>((list)=> list.map(element)=>element.title).toList();
+  static Stream<List> readTodos() => FirebaseFirestore.instance
+      .collection('todo')
       .orderBy(TodoField.createdTime, descending: true)
       .snapshots()
-      .transform();
-
+      .transform(Utils.transformer(Todo.fromJson)
+  as StreamTransformer<QuerySnapshot<Map<String, dynamic>>, List>);
 
 }
