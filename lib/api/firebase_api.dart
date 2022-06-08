@@ -18,7 +18,7 @@ class FirebaseApi{
       .collection("todo")
       .orderBy(TodoField.createdTime, descending: true)
       .snapshots()
-      .transform();
+      .transform(Utils.transformer(Json));
 
 
 }
