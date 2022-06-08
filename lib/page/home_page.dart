@@ -49,11 +49,12 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.done, size: 28), label: "Completed")
         ],
       ),
-      body: StreamBuilder<List<Todo>>(
+      body: StreamBuilder<List>(
         stream: FirebaseApi.readTodos(),
         builder: (context, snapshot) {
           final todos = snapshot.data;
           final provider = Provider.of<TodosProvider>(context);
+          provider.setTodos(todos);
 
 
 
