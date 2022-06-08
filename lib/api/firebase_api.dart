@@ -25,7 +25,9 @@ class FirebaseApi{
       .collection('todo')
       .orderBy(TodoField.createdTime, descending: true)
       .snapshots()
+     // .transform(Utils.transformer(Json));
       .transform(Utils.transformer(Todo.fromJson)
   as StreamTransformer<QuerySnapshot<Map<String, dynamic>>, List>);
+
 
 }
